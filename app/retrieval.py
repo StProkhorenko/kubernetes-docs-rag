@@ -17,6 +17,11 @@ QDRANT_URL = "http://127.0.0.1:6333"
 DEFAULT_MODE = "hybrid"
 MODEL = "intfloat/multilingual-e5-small"
 MODEL_REVISION = "614241f622f53c4eeff9890bdc4f31cfecc418b3"
+MODEL_FILES = (
+    "config.json", "model.safetensors", "modules.json", "sentence_bert_config.json",
+    "1_Pooling/config.json", "tokenizer.json", "tokenizer_config.json",
+    "special_tokens_map.json", "sentencepiece.bpe.model",
+)
 MODES = ("bm25", "numpy", "qdrant", "hybrid")
 TOKEN = re.compile(r"(?:--)?\w+(?:[.-]\w+)*")
 RUSSIAN_WORD = re.compile(r"[а-я]+")
@@ -45,6 +50,25 @@ def tokenize(text):
 def passage(chunk):
     headings = " > ".join(chunk["heading_path"])
     return f"passage: {headings}\n{chunk['text']}"
+
+
+def model_snapshot():
+    from huggingface_hub import snapshot_download
+    from huggingface_hub.errors import LocalEntryNotFoundError
+
+    try:
+        cached = Path(snapshot_download(MODEL, revision=MODEL_REVISION, local_files_only=True))
+    except LocalEntryNotFoundError:
+        pass
+    else:
+        if all((cached / name).is_file() for name in MODEL_FILES):
+            return cached
+
+    downloaded = Path(snapshot_download(MODEL, revision=MODEL_REVISION, allow_patterns=list(MODEL_FILES)))
+    missing = [name for name in MODEL_FILES if not (downloaded / name).is_file()]
+    if missing:
+        raise OSError(f"В снимке E5 отсутствуют файлы: {', '.join(missing)}")
+    return downloaded
 
 
 def reciprocal_rank_fusion(rankings, limit, rank_constant=60):
@@ -120,12 +144,7 @@ class SearchEngine:
         if self.modes & {"numpy", "qdrant", "hybrid"}:
             from sentence_transformers import SentenceTransformer
 
-            try:
-                self.encoder = SentenceTransformer(
-                    MODEL, revision=MODEL_REVISION, device="cpu", local_files_only=True
-                )
-            except OSError:
-                self.encoder = SentenceTransformer(MODEL, revision=MODEL_REVISION, device="cpu")
+            self.encoder = SentenceTransformer(str(model_snapshot()), device="cpu", local_files_only=True)
         self.vectors = None
         if "numpy" in self.modes:
             self._encode_passages()

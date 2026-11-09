@@ -24,6 +24,6 @@ COPY data/sources.json data/LICENSE-kubernetes.txt data/
 USER rag
 RUN python scripts/build_corpus.py
 EXPOSE 8000
-HEALTHCHECK --interval=10s --timeout=5s --start-period=5m --retries=3 \
+HEALTHCHECK --interval=10s --timeout=5s --start-period=9m --retries=3 \
     CMD ["python", "-c", "from urllib.request import urlopen; urlopen('http://127.0.0.1:8000/health', timeout=4).close()"]
 CMD ["python", "-m", "uvicorn", "app.api:app", "--host", "0.0.0.0", "--port", "8000"]
