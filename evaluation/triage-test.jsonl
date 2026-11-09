@@ -1,0 +1,24 @@
+{"id":"triage-test-01","type":"exact","group":"t-probe-port-source","question":"Откуда kubelet открывает соединение для TCP-пробы и почему имя Service может не разрешиться?","relevant_section_ids":["probes:289"]}
+{"id":"triage-test-02","type":"exact","group":"t-http-period","question":"С какой периодичностью выполняется HTTP liveness-проба в примере agnhost?","relevant_section_ids":["probes:125"]}
+{"id":"triage-test-03","type":"semantic","group":"t-cpu-burst","question":"Зачем задавать лимит CPU выше запроса при кратковременных всплесках нагрузки?","relevant_section_ids":["cpu:222"]}
+{"id":"triage-test-04","type":"exact","group":"t-memory-fields","question":"Какие поля resources нужны для задания запроса и лимита памяти контейнера?","relevant_section_ids":["memory:55"]}
+{"id":"triage-test-05","type":"semantic","group":"t-cron-duplicate","question":"Почему задача, запускаемая по расписанию, должна безопасно выполняться повторно?","relevant_section_ids":["cronjobs:190"]}
+{"id":"triage-test-06","type":"exact","group":"t-cron-macro","question":"Какое расписание соответствует макросу @monthly?","relevant_section_ids":["cronjobs:43"]}
+{"id":"triage-test-07","type":"semantic","group":"t-daemon-vs-deploy","question":"Как выбрать между Deployment и DaemonSet, когда важна копия Pod на узле?","relevant_section_ids":["daemonset:233"]}
+{"id":"triage-test-08","type":"exact","group":"t-daemon-unschedulable","question":"Добавляет ли DaemonSet автоматически допуск node.kubernetes.io/unschedulable?","relevant_section_ids":["daemonset:140"]}
+{"id":"triage-test-09","type":"exact","group":"t-daemon-template","question":"Какое значение restartPolicy допустимо в шаблоне Pod для DaemonSet?","relevant_section_ids":["daemonset:54"]}
+{"id":"triage-test-10","type":"exact","group":"t-image-tag-omitted","question":"Какой тег применяется при указании имени образа без тега?","relevant_section_ids":["images:18"]}
+{"id":"triage-test-11","type":"semantic","group":"t-image-node-credentials","question":"Где искать инструкции по настройке учётных данных реестра на уровне узлов?","relevant_section_ids":["images:120"]}
+{"id":"triage-test-12","type":"exact","group":"t-label-key-format","question":"Из каких частей состоит ключ метки и какой формат у необязательного префикса?","relevant_section_ids":["labels:45"]}
+{"id":"triage-test-13","type":"exact","group":"t-field-many","question":"Как отфильтровать StatefulSet и Service вне default одним вызовом kubectl?","relevant_section_ids":["fields:55"]}
+{"id":"triage-test-14","type":"semantic","group":"t-ns-unique","question":"Можно ли создавать вложенные пространства имён и где проверяется уникальность имени ресурса?","relevant_section_ids":["namespaces:15"]}
+{"id":"triage-test-15","type":"exact","group":"t-ns-list","question":"Как вывести список всех пространств имён командой kubectl?","relevant_section_ids":["namespaces:31"]}
+{"id":"triage-test-16","type":"semantic","group":"t-hook-failure","question":"Что произойдёт с контейнером, если обработчик его хука завершится неудачей?","relevant_section_ids":["hooks:44"]}
+{"id":"triage-test-17","type":"unanswerable","group":"t-gap-rollout-pause","question":"Как временно приостановить rollout Deployment, не удаляя ресурс?","relevant_section_ids":[]}
+{"id":"triage-test-18","type":"unanswerable","group":"t-gap-apf","question":"Как задать приоритет запросов к API серверу через FlowSchema?","relevant_section_ids":[]}
+{"id":"triage-test-19","type":"unanswerable","group":"t-gap-cron-alert","question":"Как написать правило Prometheus для оповещения о давно не запускавшемся CronJob?","relevant_section_ids":[]}
+{"id":"triage-test-20","type":"unanswerable","group":"t-gap-warm-node","question":"Как настроить кеширование образов в containerd через зеркала реестра в hosts.toml?","relevant_section_ids":[]}
+{"id":"triage-test-21","type":"unanswerable","group":"t-gap-seccomp","question":"Как применить профиль seccomp Localhost через securityContext?","relevant_section_ids":[]}
+{"id":"triage-test-22","type":"unanswerable","group":"t-gap-jsonpatch","question":"Как заменить значение в ConfigMap через kubectl patch с типом json?","relevant_section_ids":[]}
+{"id":"triage-test-23","type":"unanswerable","group":"t-gap-cel","question":"Как написать CEL-выражение для проверки имени Pod в ValidatingAdmissionPolicy?","relevant_section_ids":[]}
+{"id":"triage-test-24","type":"unanswerable","group":"t-gap-network-dns","question":"Как разрешить исходящий DNS-трафик через NetworkPolicy?","relevant_section_ids":[]}

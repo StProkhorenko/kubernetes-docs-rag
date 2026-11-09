@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.14"
+          cache: pip
+          cache-dependency-path: |
+            requirements.txt
+            requirements-dev.txt
+      - run: python -m pip install -r requirements-dev.txt
+      - run: python scripts/build_corpus.py
+      - run: python -m pytest -q
+
+  docker-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      SEARCH_MODES: bm25
+    steps:
+      - uses: actions/checkout@v6
+      - name: Build and start API
+        run: docker compose up --build -d --wait --wait-timeout 120
+      - name: Check the page and source links
+        run: python scripts/smoke_demo.py
+      - name: Container logs
+        if: failure()
+        run: docker compose logs --tail 150
+      - name: Stop services
+        if: always()
+        run: docker compose down --volumes

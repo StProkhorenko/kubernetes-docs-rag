@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Диагностика Kubernetes по русскоязычной документации. Поиск с точными ссылками на источники.">
+  <title>Kube Triage — диагностика Kubernetes</title>
+  <link rel="stylesheet" href="/static/workspace.css">
+  <script src="/static/workspace.js" defer></script>
+</head>
+<body>
+  <header class="topbar"><div class="shell nav">
+    <a class="brand" href="/" aria-label="Kube Triage, главная"><span class="brand-icon" aria-hidden="true">▣</span>Kube Triage</a>
+    <nav aria-label="Ссылки проекта"><a href="/docs">API</a><a href="https://github.com/StProkhorenko/kubernetes-docs-rag">GitHub ↗</a></nav>
+  </div></header>
+  <main class="shell">
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="eyebrow"><span aria-hidden="true">●</span> ПОИСК ПО ДОКУМЕНТАЦИИ</span>
+        <h1>Диагностика<br>Kubernetes</h1>
+        <p>Опиши симптом или вставь код ошибки. Найди выдержки из документации и проверь, что именно подтверждает источник.</p>
+      </div>
+      <div class="pipeline" aria-label="Как работает поиск">
+        <span class="pipeline-kicker">ПОИСКОВЫЙ КОНТУР</span>
+        <div><span class="step-number">01</span><span><b>BM25</b><small>Совпадения по терминам</small></span></div>
+        <div><span class="step-number">02</span><span><b>E5 + Qdrant</b><small>Совпадения по смыслу</small></span></div>
+        <div><span class="step-number">03</span><span><b>Гибридный поиск</b><small>Объединение выдач и ссылки</small></span></div>
+      </div>
+    </section>
+    <section class="workspace" aria-label="Поиск по документации">
+      <div class="workspace-heading">
+        <div><p class="overline">РАБОЧАЯ ОБЛАСТЬ</p><h2>Найти источник</h2></div>
+        <div class="tabs" aria-label="Вид поиска">
+          <button id="search-tab" type="button" aria-pressed="true">Диагностика</button>
+          <button id="compare-tab" type="button" aria-pressed="false">Сравнить поиск</button>
+        </div>
+      </div>
+      <form id="query-form">
+        <label for="question">Симптом или вопрос</label>
+        <div class="search-line">
+          <input id="question" name="question" maxlength="1000" required value="Что означает ImagePullBackOff?" autocomplete="off">
+          <button id="submit" class="primary" type="submit">Найти <span aria-hidden="true">→</span></button>
+        </div>
+        <div class="options"><span>Примеры</span>
+          <button class="example" type="button" data-scenario="image">ImagePullBackOff</button>
+          <button class="example" type="button" data-scenario="readiness">Readiness probe</button>
+          <button class="example" type="button" data-scenario="cron">CronJob</button>
+          <button class="example" type="button" data-scenario="helm">Вне корпуса</button>
+        </div>
+        <div id="compare-settings" class="compare-settings" hidden>
+          <label for="ranking">Вариант гибридного поиска</label>
+          <select id="ranking">
+            <option value="chunk_rrf">RRF по фрагментам</option>
+            <option value="section_rrf">RRF по разделам</option>
+            <option value="rerank">Переранжирование разделов</option>
+          </select>
+        </div>
+      </form>
+    </section>
+    <section class="results" id="results" aria-busy="true" aria-label="Результаты">
+      <div class="results-heading"><div><p class="overline">ИСТОЧНИКИ</p><h2 id="results-title">Результаты поиска</h2></div><span id="timing" class="timing"></span></div>
+      <p id="status" class="notice" role="status" aria-live="polite">Подключаемся к поиску…</p>
+      <div id="results-body"></div>
+    </section>
+  </main>
+  <footer class="shell footer"><span>Kube Triage · учебный проект</span><span>Русскоязычный снимок документации Kubernetes</span></footer>
+</body>
+</html>

@@ -1,0 +1,1145 @@
+{
+  "split": "dev",
+  "rankings": {
+    "bm25": {
+      "hits_at_5": 15,
+      "answerable": 16,
+      "mrr_at_5": 0.7604,
+      "duplicates": 7,
+      "p50_ms": 5.48,
+      "p95_ms": 7.81
+    },
+    "e5": {
+      "hits_at_5": 16,
+      "answerable": 16,
+      "mrr_at_5": 0.8875,
+      "duplicates": 5,
+      "p50_ms": 67.47,
+      "p95_ms": 111.26
+    },
+    "chunk_rrf": {
+      "hits_at_5": 16,
+      "answerable": 16,
+      "mrr_at_5": 0.8906,
+      "duplicates": 7,
+      "p50_ms": 59.3,
+      "p95_ms": 79.14
+    },
+    "section_rrf": {
+      "hits_at_5": 16,
+      "answerable": 16,
+      "mrr_at_5": 0.8906,
+      "duplicates": 0,
+      "p50_ms": 60.86,
+      "p95_ms": 78.38
+    },
+    "rerank": {
+      "hits_at_5": 16,
+      "answerable": 16,
+      "mrr_at_5": 0.8802,
+      "duplicates": 0,
+      "p50_ms": 64.59,
+      "p95_ms": 76.34
+    }
+  },
+  "selected": "section_rrf",
+  "abstention": {
+    "threshold": 0.25,
+    "correct_abstentions": 8,
+    "unanswerable": 8,
+    "false_abstentions": 1,
+    "answerable": 16
+  },
+  "rows": {
+    "bm25": [
+      {
+        "id": "triage-dev-01",
+        "type": "exact",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.6709,
+        "latency_ms": 7.81,
+        "duplicate_sections": true
+      },
+      {
+        "id": "triage-dev-02",
+        "type": "semantic",
+        "answerable": true,
+        "rank": 3,
+        "coverage": 0.4945,
+        "latency_ms": 6.16,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-03",
+        "type": "exact",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.6643,
+        "latency_ms": 6.16,
+        "duplicate_sections": true
+      },
+      {
+        "id": "triage-dev-04",
+        "type": "exact",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.8757,
+        "latency_ms": 4.22,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-05",
+        "type": "semantic",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.3352,
+        "latency_ms": 4.79,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-06",
+        "type": "exact",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.8613,
+        "latency_ms": 4.61,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-07",
+        "type": "semantic",
+        "answerable": true,
+        "rank": 2,
+        "coverage": 0.3272,
+        "latency_ms": 5.01,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-08",
+        "type": "exact",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.738,
+        "latency_ms": 5.29,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-09",
+        "type": "semantic",
+        "answerable": true,
+        "rank": 3,
+        "coverage": 0.3551,
+        "latency_ms": 5.08,
+        "duplicate_sections": true
+      },
+      {
+        "id": "triage-dev-10",
+        "type": "exact",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.7876,
+        "latency_ms": 4.83,
+        "duplicate_sections": true
+      },
+      {
+        "id": "triage-dev-11",
+        "type": "exact",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.7058,
+        "latency_ms": 4.37,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-12",
+        "type": "semantic",
+        "answerable": true,
+        "rank": null,
+        "coverage": 0.2714,
+        "latency_ms": 6.17,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-13",
+        "type": "exact",
+        "answerable": true,
+        "rank": 2,
+        "coverage": 0.6127,
+        "latency_ms": 4.83,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-14",
+        "type": "semantic",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.6593,
+        "latency_ms": 6.09,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-15",
+        "type": "exact",
+        "answerable": true,
+        "rank": 2,
+        "coverage": 0.6574,
+        "latency_ms": 5.61,
+        "duplicate_sections": true
+      },
+      {
+        "id": "triage-dev-16",
+        "type": "semantic",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.672,
+        "latency_ms": 5.35,
+        "duplicate_sections": true
+      },
+      {
+        "id": "triage-dev-17",
+        "type": "unanswerable",
+        "answerable": false,
+        "rank": null,
+        "coverage": 0.14,
+        "latency_ms": 6.03,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-18",
+        "type": "unanswerable",
+        "answerable": false,
+        "rank": null,
+        "coverage": 0.3499,
+        "latency_ms": 5.25,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-19",
+        "type": "unanswerable",
+        "answerable": false,
+        "rank": null,
+        "coverage": 0.1583,
+        "latency_ms": 6.17,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-20",
+        "type": "unanswerable",
+        "answerable": false,
+        "rank": null,
+        "coverage": 0.103,
+        "latency_ms": 4.87,
+        "duplicate_sections": true
+      },
+      {
+        "id": "triage-dev-21",
+        "type": "unanswerable",
+        "answerable": false,
+        "rank": null,
+        "coverage": 0.2465,
+        "latency_ms": 6.1,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-22",
+        "type": "unanswerable",
+        "answerable": false,
+        "rank": null,
+        "coverage": 0.2369,
+        "latency_ms": 5.63,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-23",
+        "type": "unanswerable",
+        "answerable": false,
+        "rank": null,
+        "coverage": 0.1324,
+        "latency_ms": 7.96,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-24",
+        "type": "unanswerable",
+        "answerable": false,
+        "rank": null,
+        "coverage": 0.3035,
+        "latency_ms": 6.18,
+        "duplicate_sections": false
+      }
+    ],
+    "e5": [
+      {
+        "id": "triage-dev-01",
+        "type": "exact",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.6709,
+        "latency_ms": 86.69,
+        "duplicate_sections": true
+      },
+      {
+        "id": "triage-dev-02",
+        "type": "semantic",
+        "answerable": true,
+        "rank": 5,
+        "coverage": 0.4945,
+        "latency_ms": 73.06,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-03",
+        "type": "exact",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.6643,
+        "latency_ms": 81.47,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-04",
+        "type": "exact",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.8757,
+        "latency_ms": 101.58,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-05",
+        "type": "semantic",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.3352,
+        "latency_ms": 66.42,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-06",
+        "type": "exact",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.8613,
+        "latency_ms": 58.75,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-07",
+        "type": "semantic",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.2106,
+        "latency_ms": 111.26,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-08",
+        "type": "exact",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.738,
+        "latency_ms": 99.95,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-09",
+        "type": "semantic",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.3551,
+        "latency_ms": 68.21,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-10",
+        "type": "exact",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.7876,
+        "latency_ms": 113.41,
+        "duplicate_sections": true
+      },
+      {
+        "id": "triage-dev-11",
+        "type": "exact",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.7058,
+        "latency_ms": 75.59,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-12",
+        "type": "semantic",
+        "answerable": true,
+        "rank": 2,
+        "coverage": 0.2714,
+        "latency_ms": 75.73,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-13",
+        "type": "exact",
+        "answerable": true,
+        "rank": 2,
+        "coverage": 0.6127,
+        "latency_ms": 55.64,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-14",
+        "type": "semantic",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.6593,
+        "latency_ms": 59.19,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-15",
+        "type": "exact",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.6574,
+        "latency_ms": 66.74,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-16",
+        "type": "semantic",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.672,
+        "latency_ms": 65.41,
+        "duplicate_sections": true
+      },
+      {
+        "id": "triage-dev-17",
+        "type": "unanswerable",
+        "answerable": false,
+        "rank": null,
+        "coverage": 0.2014,
+        "latency_ms": 71.71,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-18",
+        "type": "unanswerable",
+        "answerable": false,
+        "rank": null,
+        "coverage": 0.2012,
+        "latency_ms": 51.0,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-19",
+        "type": "unanswerable",
+        "answerable": false,
+        "rank": null,
+        "coverage": 0.1607,
+        "latency_ms": 63.45,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-20",
+        "type": "unanswerable",
+        "answerable": false,
+        "rank": null,
+        "coverage": 0.103,
+        "latency_ms": 60.62,
+        "duplicate_sections": true
+      },
+      {
+        "id": "triage-dev-21",
+        "type": "unanswerable",
+        "answerable": false,
+        "rank": null,
+        "coverage": 0.2465,
+        "latency_ms": 76.59,
+        "duplicate_sections": true
+      },
+      {
+        "id": "triage-dev-22",
+        "type": "unanswerable",
+        "answerable": false,
+        "rank": null,
+        "coverage": 0.1733,
+        "latency_ms": 62.75,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-23",
+        "type": "unanswerable",
+        "answerable": false,
+        "rank": null,
+        "coverage": 0.1324,
+        "latency_ms": 57.71,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-24",
+        "type": "unanswerable",
+        "answerable": false,
+        "rank": null,
+        "coverage": 0.1142,
+        "latency_ms": 60.16,
+        "duplicate_sections": false
+      }
+    ],
+    "chunk_rrf": [
+      {
+        "id": "triage-dev-01",
+        "type": "exact",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.6709,
+        "latency_ms": 79.14,
+        "duplicate_sections": true
+      },
+      {
+        "id": "triage-dev-02",
+        "type": "semantic",
+        "answerable": true,
+        "rank": 2,
+        "coverage": 0.4945,
+        "latency_ms": 64.37,
+        "duplicate_sections": true
+      },
+      {
+        "id": "triage-dev-03",
+        "type": "exact",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.6643,
+        "latency_ms": 57.26,
+        "duplicate_sections": true
+      },
+      {
+        "id": "triage-dev-04",
+        "type": "exact",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.8757,
+        "latency_ms": 48.26,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-05",
+        "type": "semantic",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.3352,
+        "latency_ms": 64.55,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-06",
+        "type": "exact",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.8613,
+        "latency_ms": 55.63,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-07",
+        "type": "semantic",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.2106,
+        "latency_ms": 56.48,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-08",
+        "type": "exact",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.738,
+        "latency_ms": 52.47,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-09",
+        "type": "semantic",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.3551,
+        "latency_ms": 66.61,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-10",
+        "type": "exact",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.7876,
+        "latency_ms": 65.74,
+        "duplicate_sections": true
+      },
+      {
+        "id": "triage-dev-11",
+        "type": "exact",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.7058,
+        "latency_ms": 57.38,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-12",
+        "type": "semantic",
+        "answerable": true,
+        "rank": 4,
+        "coverage": 0.2714,
+        "latency_ms": 56.9,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-13",
+        "type": "exact",
+        "answerable": true,
+        "rank": 2,
+        "coverage": 0.6127,
+        "latency_ms": 50.8,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-14",
+        "type": "semantic",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.6593,
+        "latency_ms": 80.9,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-15",
+        "type": "exact",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.6574,
+        "latency_ms": 48.84,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-16",
+        "type": "semantic",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.672,
+        "latency_ms": 61.23,
+        "duplicate_sections": true
+      },
+      {
+        "id": "triage-dev-17",
+        "type": "unanswerable",
+        "answerable": false,
+        "rank": null,
+        "coverage": 0.2014,
+        "latency_ms": 60.44,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-18",
+        "type": "unanswerable",
+        "answerable": false,
+        "rank": null,
+        "coverage": 0.2012,
+        "latency_ms": 48.39,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-19",
+        "type": "unanswerable",
+        "answerable": false,
+        "rank": null,
+        "coverage": 0.1607,
+        "latency_ms": 47.26,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-20",
+        "type": "unanswerable",
+        "answerable": false,
+        "rank": null,
+        "coverage": 0.103,
+        "latency_ms": 64.1,
+        "duplicate_sections": true
+      },
+      {
+        "id": "triage-dev-21",
+        "type": "unanswerable",
+        "answerable": false,
+        "rank": null,
+        "coverage": 0.2465,
+        "latency_ms": 62.48,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-22",
+        "type": "unanswerable",
+        "answerable": false,
+        "rank": null,
+        "coverage": 0.2369,
+        "latency_ms": 65.68,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-23",
+        "type": "unanswerable",
+        "answerable": false,
+        "rank": null,
+        "coverage": 0.1324,
+        "latency_ms": 58.16,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-24",
+        "type": "unanswerable",
+        "answerable": false,
+        "rank": null,
+        "coverage": 0.1521,
+        "latency_ms": 69.87,
+        "duplicate_sections": true
+      }
+    ],
+    "section_rrf": [
+      {
+        "id": "triage-dev-01",
+        "type": "exact",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.6709,
+        "latency_ms": 51.93,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-02",
+        "type": "semantic",
+        "answerable": true,
+        "rank": 2,
+        "coverage": 0.4945,
+        "latency_ms": 47.89,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-03",
+        "type": "exact",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.6643,
+        "latency_ms": 64.98,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-04",
+        "type": "exact",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.8757,
+        "latency_ms": 56.88,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-05",
+        "type": "semantic",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.3352,
+        "latency_ms": 78.38,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-06",
+        "type": "exact",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.8613,
+        "latency_ms": 59.12,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-07",
+        "type": "semantic",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.2106,
+        "latency_ms": 48.36,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-08",
+        "type": "exact",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.738,
+        "latency_ms": 55.19,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-09",
+        "type": "semantic",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.3551,
+        "latency_ms": 63.92,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-10",
+        "type": "exact",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.7876,
+        "latency_ms": 84.9,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-11",
+        "type": "exact",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.7058,
+        "latency_ms": 60.38,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-12",
+        "type": "semantic",
+        "answerable": true,
+        "rank": 4,
+        "coverage": 0.2714,
+        "latency_ms": 48.66,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-13",
+        "type": "exact",
+        "answerable": true,
+        "rank": 2,
+        "coverage": 0.6127,
+        "latency_ms": 62.73,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-14",
+        "type": "semantic",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.6593,
+        "latency_ms": 59.95,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-15",
+        "type": "exact",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.6574,
+        "latency_ms": 65.32,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-16",
+        "type": "semantic",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.672,
+        "latency_ms": 70.08,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-17",
+        "type": "unanswerable",
+        "answerable": false,
+        "rank": null,
+        "coverage": 0.2014,
+        "latency_ms": 63.11,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-18",
+        "type": "unanswerable",
+        "answerable": false,
+        "rank": null,
+        "coverage": 0.2012,
+        "latency_ms": 58.24,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-19",
+        "type": "unanswerable",
+        "answerable": false,
+        "rank": null,
+        "coverage": 0.1607,
+        "latency_ms": 61.88,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-20",
+        "type": "unanswerable",
+        "answerable": false,
+        "rank": null,
+        "coverage": 0.103,
+        "latency_ms": 61.33,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-21",
+        "type": "unanswerable",
+        "answerable": false,
+        "rank": null,
+        "coverage": 0.2465,
+        "latency_ms": 68.82,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-22",
+        "type": "unanswerable",
+        "answerable": false,
+        "rank": null,
+        "coverage": 0.2369,
+        "latency_ms": 45.81,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-23",
+        "type": "unanswerable",
+        "answerable": false,
+        "rank": null,
+        "coverage": 0.1324,
+        "latency_ms": 63.03,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-24",
+        "type": "unanswerable",
+        "answerable": false,
+        "rank": null,
+        "coverage": 0.1521,
+        "latency_ms": 48.8,
+        "duplicate_sections": false
+      }
+    ],
+    "rerank": [
+      {
+        "id": "triage-dev-01",
+        "type": "exact",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.6709,
+        "latency_ms": 63.89,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-02",
+        "type": "semantic",
+        "answerable": true,
+        "rank": 3,
+        "coverage": 0.4945,
+        "latency_ms": 65.08,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-03",
+        "type": "exact",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.6643,
+        "latency_ms": 73.4,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-04",
+        "type": "exact",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.8757,
+        "latency_ms": 63.15,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-05",
+        "type": "semantic",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.3352,
+        "latency_ms": 65.54,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-06",
+        "type": "exact",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.8613,
+        "latency_ms": 68.06,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-07",
+        "type": "semantic",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.3272,
+        "latency_ms": 67.88,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-08",
+        "type": "exact",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.738,
+        "latency_ms": 48.51,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-09",
+        "type": "semantic",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.3551,
+        "latency_ms": 50.95,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-10",
+        "type": "exact",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.7876,
+        "latency_ms": 73.94,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-11",
+        "type": "exact",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.7058,
+        "latency_ms": 71.84,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-12",
+        "type": "semantic",
+        "answerable": true,
+        "rank": 4,
+        "coverage": 0.2714,
+        "latency_ms": 80.07,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-13",
+        "type": "exact",
+        "answerable": true,
+        "rank": 2,
+        "coverage": 0.6127,
+        "latency_ms": 64.09,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-14",
+        "type": "semantic",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.6593,
+        "latency_ms": 62.31,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-15",
+        "type": "exact",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.6574,
+        "latency_ms": 62.37,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-16",
+        "type": "semantic",
+        "answerable": true,
+        "rank": 1,
+        "coverage": 0.672,
+        "latency_ms": 60.38,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-17",
+        "type": "unanswerable",
+        "answerable": false,
+        "rank": null,
+        "coverage": 0.1489,
+        "latency_ms": 65.1,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-18",
+        "type": "unanswerable",
+        "answerable": false,
+        "rank": null,
+        "coverage": 0.3499,
+        "latency_ms": 76.34,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-19",
+        "type": "unanswerable",
+        "answerable": false,
+        "rank": null,
+        "coverage": 0.1583,
+        "latency_ms": 63.62,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-20",
+        "type": "unanswerable",
+        "answerable": false,
+        "rank": null,
+        "coverage": 0.103,
+        "latency_ms": 44.3,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-21",
+        "type": "unanswerable",
+        "answerable": false,
+        "rank": null,
+        "coverage": 0.2465,
+        "latency_ms": 47.66,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-22",
+        "type": "unanswerable",
+        "answerable": false,
+        "rank": null,
+        "coverage": 0.2369,
+        "latency_ms": 70.37,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-23",
+        "type": "unanswerable",
+        "answerable": false,
+        "rank": null,
+        "coverage": 0.1324,
+        "latency_ms": 65.25,
+        "duplicate_sections": false
+      },
+      {
+        "id": "triage-dev-24",
+        "type": "unanswerable",
+        "answerable": false,
+        "rank": null,
+        "coverage": 0.3035,
+        "latency_ms": 63.92,
+        "duplicate_sections": false
+      }
+    ]
+  }
+}

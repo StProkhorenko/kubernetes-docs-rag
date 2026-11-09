@@ -3,7 +3,7 @@
 import hashlib
 import json
 import re
-from collections import defaultdict
+from collections import Counter, defaultdict
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -23,8 +23,11 @@ MODEL_FILES = (
     "special_tokens_map.json", "sentencepiece.bpe.model",
 )
 MODES = ("bm25", "numpy", "qdrant", "hybrid")
+RANKINGS = ("chunk_rrf", "section_rrf", "rerank")
+DEFAULT_RANKING = "section_rrf"
 TOKEN = re.compile(r"(?:--)?\w+(?:[.-]\w+)*")
 RUSSIAN_WORD = re.compile(r"[а-я]+")
+QUERY_STOP_WORDS = set("а и в на из у по до за для или что как какой какая какие можно если когда ли это где чем почему при к с о от его их нужно".split())
 
 
 @dataclass(frozen=True)
@@ -83,6 +86,70 @@ def reciprocal_rank_fusion(rankings, limit, rank_constant=60):
     return [Hit(chunks[key], scores[key]) for key in ordered[:limit]]
 
 
+def first_per_section(hits):
+    sections = {}
+    for hit in hits:
+        sections.setdefault(hit.chunk["section_id"], hit)
+    return list(sections.values())
+
+
+def section_fusion(rankings, limit, rank_constant=60):
+    scores = defaultdict(float)
+    representatives = {}
+    chunk_order = reciprocal_rank_fusion(rankings, sum(map(len, rankings)), rank_constant)
+    for hit in first_per_section(chunk_order):
+        representatives[hit.chunk["section_id"]] = hit.chunk
+    for ranking in rankings:
+        for rank, hit in enumerate(first_per_section(ranking), start=1):
+            scores[hit.chunk["section_id"]] += 1 / (rank_constant + rank)
+    ordered = sorted(scores, key=lambda key: (-scores[key], key))
+    return [Hit(representatives[key], scores[key]) for key in ordered[:limit]]
+
+
+def rerank_sections(hits, lexical, dense):
+    # Повторно сортируем кандидатов по сумме обратных позиций.
+    # При равенстве выше раздел с лучшей позицией BM25.
+    lexical_ranks = {hit.chunk["section_id"]: i for i, hit in enumerate(first_per_section(lexical), 1)}
+    dense_ranks = {hit.chunk["section_id"]: i for i, hit in enumerate(first_per_section(dense), 1)}
+
+    def score(hit):
+        section = hit.chunk["section_id"]
+        return (
+            (1 / lexical_ranks[section] if section in lexical_ranks else 0)
+            + (1 / dense_ranks[section] if section in dense_ranks else 0)
+        )
+
+    ordered = sorted(hits, key=lambda hit: (
+        -score(hit), lexical_ranks.get(hit.chunk["section_id"], float("inf"))
+    ))
+    return [Hit(hit.chunk, score(hit)) for hit in ordered]
+
+
+QUERY_STOP_STEMS = set(tokenize(" ".join(sorted(QUERY_STOP_WORDS))))
+
+
+def query_terms(question):
+    return {token for token in tokenize(question) if len(token) > 1 and token not in QUERY_STOP_STEMS}
+
+
+class EvidenceCoverage:
+    """Доля взвешенных терминов запроса в одном из возвращённых фрагментов."""
+
+    def __init__(self, chunks):
+        self.chunk_terms = {chunk["chunk_id"]: set(tokenize(passage(chunk))) for chunk in chunks}
+        self.frequency = Counter(token for terms in self.chunk_terms.values() for token in terms)
+
+    def score(self, question, hits):
+        terms = query_terms(question)
+        if not hits or not terms:
+            return 0.0
+        weights = {term: 1 / (1 + self.frequency[term]) ** 0.5 for term in terms}
+        return max(
+            sum(weights[term] for term in terms & self.chunk_terms[hit.chunk["chunk_id"]])
+            for hit in hits
+        ) / sum(weights.values())
+
+
 class QdrantIndex:
     def __init__(self, url, chunks, dimension, encode_passages):
         from qdrant_client import QdrantClient, models
@@ -138,6 +205,7 @@ class SearchEngine:
             raise ValueError("Корпус пуст")
         self.chunks = chunks
         self.modes = frozenset(modes)
+        self.evidence = EvidenceCoverage(chunks)
         if self.modes & {"bm25", "hybrid"}:
             documents = [tokenize(passage(chunk).removeprefix("passage: ")) for chunk in chunks]
             self.bm25 = BM25Okapi(documents)
@@ -183,7 +251,7 @@ class SearchEngine:
                     break
         return hits
 
-    def search(self, question, mode, limit=5, *, document_id=None, version=None):
+    def search(self, question, mode, limit=5, *, document_id=None, version=None, ranking=DEFAULT_RANKING):
         question = question.strip()
         if not question or limit < 1:
             raise ValueError("Нужен непустой вопрос и положительный лимит")
@@ -205,4 +273,9 @@ class SearchEngine:
             self.bm25.get_scores(tokenize(question)), candidate_limit, filters, positive_only=True
         )
         dense = self.qdrant.search(vector, candidate_limit, filters)
-        return reciprocal_rank_fusion((lexical, dense), limit)
+        if ranking == "chunk_rrf":
+            return reciprocal_rank_fusion((lexical, dense), limit)
+        sections = section_fusion((lexical, dense), candidate_limit * 2)
+        if ranking == "rerank":
+            sections = rerank_sections(sections, lexical, dense)
+        return sections[:limit]

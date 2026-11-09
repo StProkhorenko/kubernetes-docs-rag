@@ -24,11 +24,11 @@ def score_sections(hits, expected):
 
 def evaluate(engine, questions, mode):
     # Прогрев исключает инициализацию библиотек из первого измерения.
-    engine.search("Как работают пробы Kubernetes?", mode, CANDIDATE_LIMIT)
+    engine.search("Как работают пробы Kubernetes?", mode, CANDIDATE_LIMIT, ranking="chunk_rrf")
     rows = []
     for question in questions:
         start = perf_counter()
-        hits = engine.search(question["question"], mode, CANDIDATE_LIMIT)
+        hits = engine.search(question["question"], mode, CANDIDATE_LIMIT, ranking="chunk_rrf")
         elapsed = (perf_counter() - start) * 1000
         sections, recall, reciprocal_rank = score_sections(hits, question["relevant_section_ids"])
         rows.append({

@@ -2,6 +2,7 @@
 
 import math
 import os
+from time import perf_counter
 from contextlib import asynccontextmanager
 from dataclasses import dataclass
 from typing import Annotated, Literal
@@ -9,13 +10,18 @@ from typing import Annotated, Literal
 import httpx
 from dotenv import dotenv_values
 from fastapi import FastAPI, HTTPException, Request, Response
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field, StringConstraints
 from qdrant_client.http.exceptions import ApiException
 
 from app.generation import GenerationError, YandexGenerator
-from app.retrieval import CORPUS, DEFAULT_MODE, MODES, QDRANT_URL, ROOT, SearchEngine, read_jsonl
+from app.retrieval import CORPUS, DEFAULT_MODE, DEFAULT_RANKING, MODES, QDRANT_URL, ROOT, SearchEngine, read_jsonl
 
 Mode = Literal["bm25", "numpy", "qdrant", "hybrid"]
+Ranking = Literal["chunk_rrf", "section_rrf", "rerank"]
+EVIDENCE_THRESHOLD = 0.25
+STATIC_DIR = ROOT / "app" / "static"
 
 
 @dataclass(frozen=True)
@@ -60,6 +66,7 @@ class Query(BaseModel):
         examples=["Что означает ImagePullBackOff?"]
     )
     mode: Mode | None = None
+    ranking: Ranking | None = None
     limit: int = Field(default=5, ge=1, le=10)
     document_id: str | None = None
     version: str | None = None
@@ -76,10 +83,15 @@ class Source(BaseModel):
 
 class SearchResult(Source):
     score: float
+    version: str
 
 
 class SearchResponse(BaseModel):
     mode: Mode
+    ranking: Ranking | None
+    evidence: Literal["candidates", "insufficient_evidence"]
+    coverage: float
+    elapsed_ms: float
     results: list[SearchResult]
 
 
@@ -115,10 +127,11 @@ def get_mode(query, settings):
     return mode
 
 
-def search_hits(request, query, mode):
+def search_hits(request, query, mode, *, ranking=DEFAULT_RANKING):
     try:
         return request.app.state.engine.search(
-            query.question, mode, query.limit, document_id=query.document_id, version=query.version
+            query.question, mode, query.limit, document_id=query.document_id, version=query.version,
+            ranking=ranking,
         )
     except ApiException as exc:
         raise api_error(503, "index_unavailable", "Векторный индекс недоступен.") from exc
@@ -141,6 +154,11 @@ def create_app(settings=None, *, engine_factory=load_engine, llm_transport=None)
             app.state.engine.close()
 
     app = FastAPI(title="Kubernetes Docs RAG", version="0.3.0", lifespan=lifespan)
+    app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
+
+    @app.get("/", include_in_schema=False)
+    def workspace():
+        return FileResponse(STATIC_DIR / "index.html")
 
     @app.get("/health", response_model=HealthResponse, responses={503: {"model": HealthResponse}})
     def health(request: Request, response: Response):
@@ -163,9 +181,19 @@ def create_app(settings=None, *, engine_factory=load_engine, llm_transport=None)
     @app.post("/search", response_model=SearchResponse, responses={503: {"description": "Индекс недоступен"}})
     def search(query: Query, request: Request):
         """Найти фрагменты документации и ссылки на оригинал."""
+        started = perf_counter()
         mode = get_mode(query, request.app.state.config)
-        hits = search_hits(request, query, mode)
-        return SearchResponse(mode=mode, results=[SearchResult(score=hit.score, **hit.chunk) for hit in hits])
+        ranking = query.ranking or DEFAULT_RANKING
+        hits = search_hits(request, query, mode, ranking=ranking)
+        coverage = round(request.app.state.engine.evidence.score(query.question, hits), 4)
+        return SearchResponse(
+            mode=mode,
+            ranking=ranking if mode == "hybrid" else None,
+            evidence="candidates" if coverage >= EVIDENCE_THRESHOLD else "insufficient_evidence",
+            coverage=coverage,
+            elapsed_ms=round((perf_counter() - started) * 1000, 1),
+            results=[SearchResult(score=hit.score, **hit.chunk) for hit in hits],
+        )
 
     @app.post("/ask", response_model=AskResponse, responses={
         502: {"description": "Ошибка LLM или некорректные ссылки"},

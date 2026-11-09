@@ -1,0 +1,24 @@
+{"id":"triage-dev-01","type":"exact","group":"d-probe-header","question":"Как задать заголовок Host для HTTP-пробы через httpHeaders?","relevant_section_ids":["probes:289"]}
+{"id":"triage-dev-02","type":"semantic","group":"d-cpu-fields","question":"Где в манифесте указать минимальный запрос CPU и верхнюю границу для контейнера?","relevant_section_ids":["cpu:62"]}
+{"id":"triage-dev-03","type":"exact","group":"d-oom-exit","question":"Какой exitCode указан рядом с OOMKilled в примере memory-demo-2?","relevant_section_ids":["memory:119"]}
+{"id":"triage-dev-04","type":"exact","group":"d-cron-template","question":"Обязательно ли указывать .spec.jobTemplate в CronJob?","relevant_section_ids":["cronjobs:84"]}
+{"id":"triage-dev-05","type":"semantic","group":"d-cron-schedule-tz","question":"Почему API отклоняет расписание, когда часовой пояс записали прямо в строку cron через CRON_TZ?","relevant_section_ids":["cronjobs:171"]}
+{"id":"triage-dev-06","type":"exact","group":"d-daemon-required","question":"Какие общие поля обязательно указать в конфигурации DaemonSet?","relevant_section_ids":["daemonset:42"]}
+{"id":"triage-dev-07","type":"semantic","group":"d-daemon-service","question":"Какими способами клиенты могут взаимодействовать с Pod-ами демона?","relevant_section_ids":["daemonset:173"]}
+{"id":"triage-dev-08","type":"exact","group":"d-image-always","question":"Как принудительно настроить извлечение образа через imagePullPolicy: Always?","relevant_section_ids":["images:79"]}
+{"id":"triage-dev-09","type":"semantic","group":"d-image-preload","question":"Когда можно использовать образы, которые уже загружены на узлы?","relevant_section_ids":["images:185"]}
+{"id":"triage-dev-10","type":"exact","group":"d-image-auth-glob","question":"Допускает ли Kubernetes шаблоны и префиксы путей в auths файла config.json?","relevant_section_ids":["images:126"]}
+{"id":"triage-dev-11","type":"exact","group":"d-label-encoding","question":"Как передать labelSelector при LIST или WATCH через HTTP?","relevant_section_ids":["labels:144"]}
+{"id":"triage-dev-12","type":"semantic","group":"d-service-selector","question":"Как Service выбирает Pod-ы для обслуживания трафика по меткам?","relevant_section_ids":["labels:179"]}
+{"id":"triage-dev-13","type":"exact","group":"d-field-run","question":"Как найти только работающие Pod-ы через --field-selector status.phase=Running?","relevant_section_ids":["fields:5"]}
+{"id":"triage-dev-14","type":"semantic","group":"d-ns-context","question":"Как указать пространство имён сразу для всех следующих команд в текущем контексте kubectl?","relevant_section_ids":["namespaces:62"]}
+{"id":"triage-dev-15","type":"exact","group":"d-hook-poststart","question":"Гарантируется ли выполнение PostStart до запуска ENTRYPOINT?","relevant_section_ids":["hooks:23"]}
+{"id":"triage-dev-16","type":"semantic","group":"d-hook-exec","question":"Где выполняется команда, назначенная обработчиком хука Exec?","relevant_section_ids":["hooks:37"]}
+{"id":"triage-dev-17","type":"unanswerable","group":"d-gap-drain","question":"Как выселить Pod-ы с узла перед его обновлением командой kubectl drain?","relevant_section_ids":[]}
+{"id":"triage-dev-18","type":"unanswerable","group":"d-gap-ingress-class","question":"Где указать ingressClassName для выбора NGINX Ingress Controller?","relevant_section_ids":[]}
+{"id":"triage-dev-19","type":"unanswerable","group":"d-gap-pvc-resize","question":"Как увеличить объём существующего PersistentVolumeClaim без его удаления?","relevant_section_ids":[]}
+{"id":"triage-dev-20","type":"unanswerable","group":"d-gap-probe-mesh","question":"Как отключить переписывание HTTP-проб сайдкаром Istio?","relevant_section_ids":[]}
+{"id":"triage-dev-21","type":"unanswerable","group":"d-gap-cron-ttl","question":"Как удалять завершённые Job по времени через ttlSecondsAfterFinished?","relevant_section_ids":[]}
+{"id":"triage-dev-22","type":"unanswerable","group":"d-gap-sidecar-init","question":"Как объявить нативный sidecar через restartPolicy: Always у initContainers?","relevant_section_ids":[]}
+{"id":"triage-dev-23","type":"unanswerable","group":"d-gap-auth-can-i","question":"Как проверить, может ли сервисный аккаунт читать Secret через kubectl auth can-i?","relevant_section_ids":[]}
+{"id":"triage-dev-24","type":"unanswerable","group":"d-gap-configmap-env","question":"Как загрузить все ключи ConfigMap в переменные окружения через envFrom?","relevant_section_ids":[]}
