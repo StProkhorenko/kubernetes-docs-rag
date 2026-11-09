@@ -1,0 +1,43 @@
+services:
+  app:
+    build: .
+    ports:
+      - "127.0.0.1:8000:8000"
+    environment:
+      QDRANT_URL: http://qdrant:6333
+      SEARCH_MODES: ${SEARCH_MODES:-bm25,qdrant,hybrid}
+      LLM_API_KEY: ${LLM_API_KEY:-}
+      LLM_FOLDER_ID: ${LLM_FOLDER_ID:-}
+      LLM_MODEL: ${LLM_MODEL:-yandexgpt/rc}
+      LLM_TIMEOUT_SECONDS: ${LLM_TIMEOUT_SECONDS:-20}
+    volumes:
+      - model_cache:/model-cache
+    depends_on:
+      qdrant:
+        condition: service_healthy
+
+  qdrant:
+    image: qdrant/qdrant:v1.20.0
+    ports:
+      - "127.0.0.1:6333:6333"
+    environment:
+      QDRANT__TELEMETRY_DISABLED: "true"
+    volumes:
+      - qdrant_data:/qdrant/storage
+    healthcheck:
+      test:
+        - CMD
+        - bash
+        - -ec
+        - >-
+          exec 3<>/dev/tcp/127.0.0.1/6333;
+          printf 'GET /readyz HTTP/1.0\r\n\r\n' >&3;
+          read -r status <&3;
+          [[ "$$status" == *" 200 "* ]]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+volumes:
+  model_cache:
+  qdrant_data:

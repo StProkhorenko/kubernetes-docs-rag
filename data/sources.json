@@ -1,0 +1,47 @@
+{
+  "repository": "https://github.com/kubernetes/website",
+  "commit": "14783102c018b7a79d99462fb6cdbd5473f157d6",
+  "license": "CC-BY-4.0",
+  "documents": [
+    {
+      "id": "probes",
+      "path": "content/ru/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes.md"
+    },
+    {
+      "id": "cpu",
+      "path": "content/ru/docs/tasks/configure-pod-container/assign-cpu-resource.md"
+    },
+    {
+      "id": "memory",
+      "path": "content/ru/docs/tasks/configure-pod-container/assign-memory-resource.md"
+    },
+    {
+      "id": "cronjobs",
+      "path": "content/ru/docs/concepts/workloads/controllers/cron-jobs.md"
+    },
+    {
+      "id": "daemonset",
+      "path": "content/ru/docs/concepts/workloads/controllers/daemonset.md"
+    },
+    {
+      "id": "images",
+      "path": "content/ru/docs/concepts/containers/images.md"
+    },
+    {
+      "id": "labels",
+      "path": "content/ru/docs/concepts/overview/working-with-objects/labels.md"
+    },
+    {
+      "id": "fields",
+      "path": "content/ru/docs/concepts/overview/working-with-objects/field-selectors.md"
+    },
+    {
+      "id": "namespaces",
+      "path": "content/ru/docs/concepts/overview/working-with-objects/namespaces.md"
+    },
+    {
+      "id": "hooks",
+      "path": "content/ru/docs/concepts/containers/container-lifecycle-hooks.md"
+    }
+  ]
+}

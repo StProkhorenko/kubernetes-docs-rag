@@ -1,0 +1,12 @@
+--extra-index-url https://download.pytorch.org/whl/cpu
+numpy==2.5.4
+rank-bm25==0.2.2
+snowballstemmer==3.0.1
+torch==2.15.0+cpu
+sentence-transformers==5.7.0
+qdrant-client==1.20.0
+fastapi==0.162.2
+uvicorn==0.54.0
+python-dotenv==1.2.4
+httpx==0.28.1
+pydantic==2.14.3
